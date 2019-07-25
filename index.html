@@ -506,6 +506,80 @@
   <!-- jQuery if you need it
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   -->
+	<script type="text/javascript">
+        var scalp = [];
+
+        function upload() {
+            const reader = new FileReader();
+            
+            reader.onloadend = function () {
+
+                const ipfs = window.IpfsApi( 'ipfs.infura.io', '5001', {protocol: 'https'})   // Connect to IPFS
+                const buf = buffer.Buffer(reader.result)    // Convert data into buffer
+                ipfs.files.add(buf, (err, result) => {   // Upload buffer to IPFS
+                    if (err) {
+                        console.error(err)
+                        return
+                    }
+                    console.log("result is", result);
+                    let url = "https://ipfs.io/ipfs/" + result[0].hash;
+                    console.log("Url -->", url);
+                    document.getElementById("url").innerHTML = url
+                    document.getElementById("url").href = url
+                    //document.getElementById("output").src = url
+                    var json = buf.toJSON(buf);
+                    scalp.push(json);
+
+                    console.log(json);
+                })
+            }
+            const photo = document.getElementById("photo");
+            reader.readAsArrayBuffer(photo.files[0]);     //Read Provided File
+        }
+           var items = [];
+   
+ 
+   function myFunction() {
+   boxvalue = document.getElementById('url').text;
+   items.push(boxvalue);  
+   console.log(items);
+   return false;
+    }
+
+    function AnotherFunction() {
+
+        console.log("The function can work.")
+    }
+
+
+
+       function Leboh()
+    {
+       var rage, selection, worked;
+       if(document.body.createTextRange)
+       {
+           Range=document.body.createTextRange();
+           rage.moveToElementText(Element);
+           range.select();
+       } else if(Window.getSelection)
+       {
+        selection= window.getSelection();
+        rage=document.createRange();
+        rage=selectNodeContents(Element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+       }
+
+       try{document.execCommand('copy');
+       alert('text copied');}
+       catch(err)
+       {
+           alert('unable to copy');
+       }
+
+    }
+
+    </script>
 	<script>
 $(function () {
 
