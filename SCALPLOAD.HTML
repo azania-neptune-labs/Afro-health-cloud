@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>restdb.io hashes</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-hQpvDQiCJaD2H465dQfA717v7lu5qHWtDbWNPvaTJ0ID5xnPUlVXnKzq7b8YUkbN" crossorigin="anonymous">
+  <link href="https://crypto-e6a5.restdb.io/assets/css/jquery.datetimepicker.min.css" rel="stylesheet">
+    <!-- Font Awesome if you need it
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  -->
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css">
+  <!--Replace with your tailwind.css once created-->
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+
+  <!-- Define your gradient here - use online tools to find a gradient matching your branding-->
+  <script src="JavaScript.js"></script>
+    <script src="https://unpkg.com/ipfs-api@9.0.0/dist/index.js"
+            integrity="sha384-5bXRcW9kyxxnSMbOoHzraqa7Z0PQWIao+cgeg327zit1hz5LZCEbIMx/LWKPReuB"
+            crossorigin="anonymous"></script>
+  <style>
+    .gradient {
+      background: linear-gradient(90deg, #d53369 0%, #daae51 100%);"
+    }
+
+
+    .thank-you{
+      font-size: 16px;
+      padding: 20px;	
+    }
+    #hashes-form{
+      padding: 10px;
+    }
+    #hashes-form input,  #hashes-form select{
+      width: 300px;
+    }
+    label{
+      display: block;
+    }
+    .form-control{
+      width: auto;
+    }
+    .help-block{
+      margin-left:10px;
+    }
+    .progress{
+      width: 300px;
+      height:10px;
+      border-radius:0px;
+      margin-top: 2px;
+    }
+    #btn-submit{
+        width: 300px;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
+  <script src="https://crypto-e6a5.restdb.io/assets/js/jquery-serialize-object.min.js"></script>
+  <script src="https://crypto-e6a5.restdb.io/assets/js/jquery.datetimepicker.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.5.1/lodash.min.js"></script>
+</head>
+<body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
+  <nav id="header" class="fixed w-full z-30 top-0 text-white">
+
+  <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+      
+ <!--   <div class="pl-4 flex items-center">
+      <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"  href="#"> 
+      
+        <svg class="h-8 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.005 512.005">
+        <rect fill="#2a2a31" x="16.539" y="425.626" width="479.767" height="50.502" transform="matrix(1,0,0,1,0,0)" fill="rgb(0,0,0)" />
+        <path class="plane-take-off" d=" M 510.7 189.151 C 505.271 168.95 484.565 156.956 464.365 162.385 L 330.156 198.367 L 155.924 35.878 L 107.19 49.008 L 211.729 230.183 L 86.232 263.767 L 36.614 224.754 L 0 234.603 L 45.957 314.27 L 65.274 347.727 L 105.802 336.869 L 240.011 300.886 L 349.726 271.469 L 483.935 235.486 C 504.134 230.057 516.129 209.352 510.7 189.151 Z "/>
+        </svg>
+      </a>
+    </div>
+-->
+    <div class="block lg:hidden pr-4">
+      <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-800 hover:border-teal-500 appearance-none focus:outline-none">
+        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+      </button>
+    </div>
+
+    <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
+      <ul class="list-reset lg:flex justify-end flex-1 items-center">
+        <li class="mr-3">
+          <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">About Afro health cloud</a>
+        </li>
+        <li class="mr-3">
+          <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#">Admition form</a>
+        </li>
+        <li class="mr-3">
+          <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#">Go to cloud</a>
+        </li>
+      </ul>
+      <button id="navAction" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75">Learn</button>
+    </div>
+  </div>
+  
+  <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
+</nav>
+
+<!--Hero-->
+<div class="pt-10">
+
+  <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+    <!--Left Col-->
+    <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
+
+  <form role="form" id="hashes-form">
+
+        <fieldset>
+            <legend>Upload files</legend>
+            <input type="file" name="photo" id="photo">
+            <button type="button" onclick="upload()">Upload</button>
+        </fieldset>
+        <div>
+      
+
+   <code>
+   <a id="url" type="text" onchange="myFunctions()" onclick="return false; onclick='myFunctions(this)'"></a>
+ </code>
+    </div>
+<div class="form-group">
+  <label>Hash: </label><input class="form-control" name="hash" data-type="text" type="text">
+</div>
+
+  <div id="fg-errors" class="form-group">
+  </div>
+  <button class="btn btn-primary btn-lg" id="btn-submit" type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Submitting...">Submit</button></form>
+
+</div>
+
+    <!--Right Col-->
+     <div class="w-full md:w-3/5 py-6 text-center">
+      <img class="w-full md:w-4/5 z-50" src="file:///C:/Users/Invotech/Documents/azania/Azania%20test/Afro-Cloud-master/Afro-health-cloud-master/hero.png">
+    </div>
+    
+  </div>
+
+</div>
+
+<script>
+$(function () {
+
+  // put your own error messages and/or message translation logic here
+
+  var errorMessages = {
+    "REQUIRED": "This field is required",
+    "UNIQUE": "This value already exists",
+    "TYPE": "Invalid data type",
+    "REGEX":"Invalid data format",
+    "number": "Must be an integer number",
+    "money": "Must be a number with max two decimals",
+    "JSON":"Not a valid JSON",
+    "float_number":"Must be a decimal number",
+    "email": "Must be a valid email",
+    "FILESIZE": "Upload exceeds file size limit per field (max 1 MB)",
+    "UPLOADERROR": "Unable to upload file, please try again",
+    "GENERIC_ERROR": "A server error occured, please reload page"
+  }
+
+  var successMessage = "Thank you!";
+
+  // enable javascript datetimepicker unless supported
+  // Docs and settings: http://xdsoft.net/jqplugins/datetimepicker/
+
+  $.datetimepicker.setLocale('en');
+
+  // if missing support for datetime, then use jquery.datetimepicker
+
+  if (!Modernizr.inputtypes.datetime){
+      $("input[data-type=date]").datetimepicker({timepicker:false,format:"Y/m/d"}).attr("type","text");
+      $("input[data-type=datetime]").datetimepicker({}).attr("type","text");
+      $("input[data-type=time]").datetimepicker({datepicker:false,format:"H:i",value:"12:00"}).attr("type","text");
+  }
+
+  $("#hashes-form input[data-type=file], #hashes-form input[data-type=image]").on("change",function(){
+    $(this).data("uploadedfiles",[]);    
+  });
+  var apikey = "{{settings.formapikey}}"; // TODO: INSERT YOUR CORS API KEY HERE OR add formapikey to settings
+  
+  if (!apikey) alert("Please insert a CORS API key");
+
+  var ajaxSettings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://crypto-e6a5.restdb.io/rest/hashes",
+    "method": "POST",
+    "headers": {
+      "x-apikey": apikey,
+      "content-type": "application/json"
+    },
+    "processData": false
+  }
+
+  var ajaxSettingsAttachments = {
+     "async": true,
+     "url": "https://crypto-e6a5.restdb.io/media",
+     "method": "POST",
+     "contentType": false,
+     "headers": {
+       "x-apikey": apikey
+     },
+     "cache": false,
+     "processData": false
+   }
+
+
+
+  function uploadAttachment(item){
+    var deferred = $.Deferred();
+    var datatype = $(item).attr("data-type");
+    var element_name = $(item).attr("name");
+    var formData = new FormData();
+    var files = $(item)[0].files;
+    var totalsize = 0;
+    var files_to_upload = []
+    _.each(files,function(file){
+      // ignore non-images
+      if(datatype==="image" && !file.type.match('image.*')){
+        return;
+      }else{
+        files_to_upload.push(file);
+        totalsize += file.size;        
+      }
+    });
+
+    // check max upload file size for development plan
+    if (totalsize<=1000000){
+      _.each(files_to_upload,function(file){
+        formData.append(element_name, file, file.name);
+      });
+      var asa = _.clone(ajaxSettingsAttachments);
+      asa.xhr = function() {
+        var xhr = new window.XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function(evt) {
+          if (evt.lengthComputable) {
+            var percentComplete = evt.loaded / evt.total;
+            percentComplete = parseInt(percentComplete * 100)+"%";
+            $("#"+element_name+"_progress")
+            .css("width",percentComplete)
+          }
+        }, false);
+        return xhr;
+      }
+      asa.data = formData;
+      var uploadedbefore = $(item).data("uploaded");
+      if (!uploadedbefore){
+        $("#"+element_name+"_progress").parent().removeClass("hidden");
+        $("#btn-submit").button("loading");
+        $.ajax(asa)
+        .success(function(data){
+          var result = data.ids || [];
+          var successObj = {};
+          successObj[element_name] = result;
+          $(item).data("uploaded",result);
+          deferred.resolve(successObj);       
+        })
+        .fail(function(){
+          deferred.reject({field: element_name, error: errorMessages.UPLOADERROR});
+        });
+      }else{
+        var obj = {};
+        obj[element_name]=uploadedbefore;
+        deferred.resolve(obj);
+      }
+    }else{
+      deferred.reject({field: element_name, error: errorMessages.FILESIZE});
+    }
+    return deferred.promise();
+  }
+
+  function postForm() {
+
+    // clear errors
+    $("#hashes-form .has-error").removeClass("has-error");
+    $("#hashes-form .help-block").remove();
+
+    $("#btn-submit").button("loading");
+
+  // we need to reformat date, datetime, datetime-local and time to ISO date strings
+
+    $("input[data-type=datetime],input[data-type=datetime-local]").each(function(){
+        var theDate = $(this).val();
+        if(theDate){
+            var isodate_str = new Date(theDate).toISOString();
+            $(this).val(isodate_str);   
+        }
+    });
+
+    $("input[data-type=date]").each(function(){
+      var theDate = $(this).val();
+      if (theDate){
+          theDate += " GMT";
+          var isodate_str = new Date(theDate).toISOString();
+          $(this).val(isodate_str);
+      }
+    });
+
+     $("input[data-type=time]").each(function(){
+        var timeval = $(this).val();
+        if (timeval){
+            var regex = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/
+            if (timeval.match(regex)){
+                var isodate_str = new Date("1970-01-01T"+$(this).val()+":00Z").toISOString();
+                $(this).val(isodate_str);
+            }   
+        }
+    });
+
+
+ // get the form data
+    var formObj = $("#hashes-form").serializeObject();
+
+    // get attachments from inputs
+    var attachments = [];
+
+    $("#hashes-form input[data-type=file], #hashes-form input[data-type=image]").each(function(input){
+      var files = $(this)[0].files;
+      if(files && files.length>0){
+        attachments.push($(this));
+      }
+    });
+
+    var attachFuncs = [];
+    _.each(attachments,function(attachment){
+      attachFuncs.push(uploadAttachment(attachment));
+    });
+  
+    // upload all attachments and return with ids when done
+    $.when.apply(null,attachFuncs)
+      .done(function(){
+        // get the attachment id's from arguments and store into form obj
+
+        _.each(arguments,function(fieldObj){
+          formObj = _.assign(formObj,fieldObj);
+        });
+
+       // submit the whole form with attachment ids 
+
+       ajaxSettings.data = JSON.stringify(formObj);
+        $.ajax(ajaxSettings)
+        .done(function (response) {
+          // replaces form with a thank you message, please replace with your own functionality
+          $("#hashes-form").replaceWith("<div class='thank-you'>"+successMessage+"</div>");
+        })
+        .fail(function (response) {
+          $("#btn-submit").button("reset");
+          var error = response.responseJSON;
+          if (error && error.name==="ValidationError"){
+            _.each(error.list,function(fielderr){
+              var inputSelector = "[name="+fielderr.field+"]";
+              var errorMessageCode = fielderr.message[1];
+              var errorMessage = errorMessages[errorMessageCode] || "Invalid value";
+              if (errorMessageCode==="TYPE"){
+                var fieldType = $(inputSelector).data("type");
+                errorMessage = errorMessages[fieldType] || "Invalid value";
+              }
+              $(inputSelector).after("<div class='help-block'>"+errorMessage+"</div>");
+              $(inputSelector).parents(".form-group").addClass("has-error");
+            });
+          }
+          else{
+            var msg = (ajaxSettings.headers["x-apikey"] && ajaxSettings.headers["x-apikey"].length < 24) ? "Missing API-key": "Server Error";
+            alert(msg);
+          }
+        });
+      })
+      .fail( function (response) {
+        $("#btn-submit").button("reset");
+        if (response.field && response.error){
+          var inputSelector = "[name="+response.field+"]";
+          $(inputSelector).after("<div class='help-block'>"+response.error+"</div>");
+          $(inputSelector).parents(".form-group").addClass("has-error");
+        }else{
+          var errorMessage = errorMessages.GENERIC_ERROR || "Problem submitting form";
+          $("#fg-errors").addClass("has-error")
+          .append("<div class='help-block'>"+errorMessage+"</div>");
+        }
+      });
+  };
+
+  $("#hashes-form").submit(function (event) {
+        postForm();
+        event.preventDefault();
+        return false;
+    });
+});
+</script>
+<script>
+  var scrollpos = window.scrollY;
+  var header = document.getElementById("header");
+  var navcontent = document.getElementById("nav-content");
+  var navaction = document.getElementById("navAction");
+  var brandname = document.getElementById("brandname");
+  var toToggle = document.querySelectorAll(".toggleColour");
+  document.addEventListener('scroll', function() {
+  /*Apply classes for slide in bar*/
+  scrollpos = window.scrollY;
+    if(scrollpos > 10){
+      header.classList.add("bg-white");
+    navaction.classList.remove("bg-white");
+    navaction.classList.add("gradient");
+    navaction.classList.remove("text-gray-800");
+    navaction.classList.add("text-white");
+    //Use to switch toggleColour colours
+      for (var i = 0; i < toToggle.length; i++) {
+       toToggle[i].classList.add("text-gray-800");
+     toToggle[i].classList.remove("text-white");
+    }
+    header.classList.add("shadow");
+    navcontent.classList.remove("bg-gray-100");
+    navcontent.classList.add("bg-white");
+    }
+    else {
+    header.classList.remove("bg-white");
+    navaction.classList.remove("gradient");
+    navaction.classList.add("bg-white");
+    navaction.classList.remove("text-white");
+    navaction.classList.add("text-gray-800");
+    //Use to switch toggleColour colours
+      for (var i = 0; i < toToggle.length; i++) {
+       toToggle[i].classList.add("text-white");
+     toToggle[i].classList.remove("text-gray-800");
+    }
+    
+    header.classList.remove("shadow");
+    navcontent.classList.remove("bg-white");
+    navcontent.classList.add("bg-gray-100");
+    
+    }
+  });
+  
+</script>
+
+<script>
+  
+  
+  /*Toggle dropdown list*/
+  /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
+  
+  var navMenuDiv = document.getElementById("nav-content");
+  var navMenu = document.getElementById("nav-toggle");
+  
+  document.onclick = check;
+  function check(e){
+    var target = (e && e.target) || (event && event.srcElement);
+    
+    //Nav Menu
+    if (!checkParent(target, navMenuDiv)) {
+    // click NOT on the menu
+    if (checkParent(target, navMenu)) {
+      // click on the link
+      if (navMenuDiv.classList.contains("hidden")) {
+      navMenuDiv.classList.remove("hidden");
+      } else {navMenuDiv.classList.add("hidden");}
+    } else {
+      // click both outside link and outside menu, hide menu
+      navMenuDiv.classList.add("hidden");
+    }
+    }
+    
+  }
+  function checkParent(t, elm) {
+    while(t.parentNode) {
+    if( t == elm ) {return true;}
+    t = t.parentNode;
+    }
+    return false;
+  }
+</script>
+
+    <script type="text/javascript">
+        var scalp = [];
+
+        function upload() {
+            const reader = new FileReader();
+            
+            reader.onloadend = function () {
+
+                const ipfs = window.IpfsApi('localhost', 5001)   // Connect to IPFS
+                const buf = buffer.Buffer(reader.result)    // Convert data into buffer
+                ipfs.files.add(buf, (err, result) => {   // Upload buffer to IPFS
+                    if (err) {
+                        console.error(err)
+                        return
+                    }
+                    console.log("result is", result);
+                    let url = "https://ipfs.io/ipfs/" + result[0].hash;
+                    console.log("Url -->", url);
+                    document.getElementById("url").innerHTML = url
+                    document.getElementById("url").href = url
+                    //document.getElementById("output").src = url
+                    var json = buf.toJSON(buf);
+                    scalp.push(json);
+
+                    console.log(json);
+                })
+            }
+            const photo = document.getElementById("photo");
+            reader.readAsArrayBuffer(photo.files[0]);     //Read Provided File
+        }
+           var items = [];
+   
+ 
+   function myFunction() {
+   boxvalue = document.getElementById('url').text;
+   items.push(boxvalue);  
+   console.log(items);
+   return false;
+    }
+
+    function AnotherFunction() {
+
+        console.log("The function can work.")
+    }
+
+
+
+       function Leboh()
+    {
+       var rage, selection, worked;
+       if(document.body.createTextRange)
+       {
+           Range=document.body.createTextRange();
+           rage.moveToElementText(Element);
+           range.select();
+       } else if(Window.getSelection)
+       {
+        selection= window.getSelection();
+        rage=document.createRange();
+        rage=selectNodeContents(Element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+       }
+
+       try{document.execCommand('copy');
+       alert('text copied');}
+       catch(err)
+       {
+           alert('unable to copy');
+       }
+
+    }
+
+    </script>
+  </body>
+</html>
