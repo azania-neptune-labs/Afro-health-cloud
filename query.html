@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>query</title>
+</head>
+<body>
+     <script type="text/javascript">
+     	var settings = {
+     		"async": true,
+     		"crossDomain": true,
+     		"url": "https://crypto-e6a5.restdb.io/rest/hashes",
+     		"method": "GET",
+     		"headers": {
+     			"content-type": "application/json",
+     			"x-aikey": "5d39a391769140543c170099"
+     			"cache-control": "no-cache"
+     		}
+     	}
+
+     	$.ajax(settings).done(function (response) {
+     		console.log(response);
+     	});
+     </script>
+</body>
+</html>
