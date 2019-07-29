@@ -1,27 +1,22 @@
-<!DOCTYPE html>
 <html>
 <head>
-	<title>query</title>
-	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<title>yeah</title>
+	<script src="jquery-3.4.1.min.js"></script>
 </head>
 <body>
+   <div id="show">
+   	
+   </div>	
+	<button onclick="get()">Load data</button>
+	<script type="text/javascript">
+		async function get() {
+    let url = 'https://crypto-e6a5.restdb.io/hashes'
+    let obj = await (await fetch(url)).json();
+    var londeka = JSON.stringify(obj);
+    document.getElementById("show").innerHTML = londeka;
+}
+	</script>
+</body>
 
-     <script type="text/javascript">
-     	var settings = {
-     		"async": true,
-     		"crossDomain": true,
-     		"url": "https://crypto-e6a5.restdb.io/rest/hashes",
-     		"method": "GET",
-     		"headers": {
-     			"content-type": "application/json",
-     			"x-aikey": "5d39a391769140543c170099",
-     			"cache-control": "no-cache"
-     		}
-     	}
-
-     	$.ajax(settings).done(function (response) {
-     		console.log(response);
-     	});
-     </script>
 </body>
 </html>
