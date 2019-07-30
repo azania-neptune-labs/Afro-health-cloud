@@ -6,6 +6,56 @@
 <div id="id01"></div>
 
 <script>
+  var restDB = (function() {
+
+  // configure for your own DB
+  var 
+    api = 'https://sitepoint-fbbf.restdb.io/rest/',
+    APIkey = '597dd2c7a63f5e835a5df8c4';
+    
+ function query(url, callback) {
+
+    var timeout, xhr = new XMLHttpRequest();
+
+    // set URL and headers
+    xhr.open('GET', api + url);
+    xhr.setRequestHeader('x-apikey', APIkey);
+    xhr.setRequestHeader('content-type', 'application/json');
+    xhr.setRequestHeader('cache-control', 'no-cache');
+   // response handler
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState !== 4) return;
+      var err = (xhr.status !== 200), data = null;
+      clearTimeout(timeout);
+      if (!err) {
+        try {
+          data = JSON.parse(xhr.response);
+        }
+        catch(e) {
+          err = true;
+          data = xhr.response || null;
+        }
+      }
+      callback(err, data);
+    };
+
+    // timeout
+    timeout = setTimeout(function() {
+      xhr.abort();
+      callback(true, null);
+    }, 10000);
+
+    // start call
+    xhr.send();
+  }
+
+  // public query method
+  return {
+    query: query
+  };
+
+})();
+    
 var xmlhttp = new XMLHttpRequest();
 var url = 'https://crypto-e6a5.restdb.io/rest/hashes';
 
