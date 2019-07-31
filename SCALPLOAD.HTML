@@ -112,13 +112,19 @@
    <button class="btn" type="button">Click</button>
       <script>
      $(document).ready(function(){
-       const Url="https://crypto-e6a5.restdb.io/rest/hashes";
+        
        $('.btn').click(function(){
        $.ajax({
-         url:Url,
-         type:"GET",
+         "async": true,
+         "crossDomain": true,
+         "url":"https://crypto-e6a5.restdb.io/rest/hashes",
+         "method":"GET",
+         "headers": {
+          "content-type": "application/json",
+          "x-aikey": "5d39a391769140543c170099",
+          "cache-control": "no-cache"
          success: function(result){
-           console.log(result)
+           console.log(response)
          },
          error: function(error)
          {
