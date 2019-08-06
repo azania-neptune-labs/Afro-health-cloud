@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,13 +20,12 @@
             crossorigin="anonymous"></script>
   <style>
     .gradient {
-      background: linear-gradient(90deg, #d53369 0%, #daae51 100%);"
+      background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
     }
     #nav .nav-item {
       padding-left: 1.2em;
       font-size: 20px;
     }
-
     .thank-you{
       font-size: 16px;
       padding: 20px;	
@@ -64,7 +62,6 @@
   <script src="https://crypto-e6a5.restdb.io/assets/js/jquery-serialize-object.min.js"></script>
   <script src="https://crypto-e6a5.restdb.io/assets/js/jquery.datetimepicker.full.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.5.1/lodash.min.js"></script>
-
 </head>
 <body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
 
@@ -129,14 +126,6 @@
 
   <form role="form" id="hashes-form">
 
-        <fieldset>
-            <legend>Upload files</legend>
-            <input type="file" name="photo" id="photo">
-            <button type="button" onclick="upload()">Upload</button>
-        </fieldset>
-        <div>
-      
-
    <code>
    <a id="url" type="text" onchange="myFunctions()" onclick="return false; onclick='myFunctions(this)'"></a>
  </code>
@@ -162,12 +151,19 @@
   </div>
 
 </div>
-
+<button>Get data</button>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> <script type="text/javascript"> const btn = document.querySelector('button'); btn.addEventListener('click',getData); function getData(e){ $.ajax({ 
+url : 'https:crypto-ea',
+ method : 'GET',
+ success : function(data){ console.log(data);
+ }, 
+error: function(err){ 
+console.log('Failed');
+ } }); } 
+</script>
 <script>
 $(function () {
-
   // put your own error messages and/or message translation logic here
-
   var errorMessages = {
     "REQUIRED": "This field is required",
     "UNIQUE": "This value already exists",
@@ -182,44 +178,36 @@ $(function () {
     "UPLOADERROR": "Unable to upload file, please try again",
     "GENERIC_ERROR": "A server error occured, please reload page"
   }
-
   var successMessage = "Thank you!";
-
   // enable javascript datetimepicker unless supported
   // Docs and settings: http://xdsoft.net/jqplugins/datetimepicker/
-
   $.datetimepicker.setLocale('en');
-
   // if missing support for datetime, then use jquery.datetimepicker
-
   if (!Modernizr.inputtypes.datetime){
       $("input[data-type=date]").datetimepicker({timepicker:false,format:"Y/m/d"}).attr("type","text");
       $("input[data-type=datetime]").datetimepicker({}).attr("type","text");
       $("input[data-type=time]").datetimepicker({datepicker:false,format:"H:i",value:"12:00"}).attr("type","text");
   }
-
   $("#hashes-form input[data-type=file], #hashes-form input[data-type=image]").on("change",function(){
     $(this).data("uploadedfiles",[]);    
   });
   var apikey = "{{settings.formapikey}}"; // TODO: INSERT YOUR CORS API KEY HERE OR add formapikey to settings
   
   if (!apikey) alert("Please insert a CORS API key");
-
   var ajaxSettings = {
     "async": true,
     "crossDomain": true,
-    "url": "https://crypto-e6a5.restdb.io/rest/hashes",
+    "url": "https://azania-cfa4.restdb.io/rest/contact",
     "method": "POST",
     "headers": {
-      "x-apikey":"5d20d21a1e3c8507f2caa12f",
+      "x-apikey": "5d20d21a1e3c8507f2caa12f",
       "content-type": "application/json"
     },
     "processData": false
   }
-
   var ajaxSettingsAttachments = {
      "async": true,
-     "url": "https://crypto-e6a5.restdb.io/media",
+     "url": "https://azania-cfa4.restdb.io/media",
      "method": "POST",
      "contentType": false,
      "headers": {
@@ -228,9 +216,6 @@ $(function () {
      "cache": false,
      "processData": false
    }
-
-
-
   function uploadAttachment(item){
     var deferred = $.Deferred();
     var datatype = $(item).attr("data-type");
@@ -248,7 +233,6 @@ $(function () {
         totalsize += file.size;        
       }
     });
-
     // check max upload file size for development plan
     if (totalsize<=1000000){
       _.each(files_to_upload,function(file){
@@ -293,17 +277,12 @@ $(function () {
     }
     return deferred.promise();
   }
-
   function postForm() {
-
     // clear errors
     $("#hashes-form .has-error").removeClass("has-error");
     $("#hashes-form .help-block").remove();
-
     $("#btn-submit").button("loading");
-
   // we need to reformat date, datetime, datetime-local and time to ISO date strings
-
     $("input[data-type=datetime],input[data-type=datetime-local]").each(function(){
         var theDate = $(this).val();
         if(theDate){
@@ -311,7 +290,6 @@ $(function () {
             $(this).val(isodate_str);   
         }
     });
-
     $("input[data-type=date]").each(function(){
       var theDate = $(this).val();
       if (theDate){
@@ -320,7 +298,6 @@ $(function () {
           $(this).val(isodate_str);
       }
     });
-
      $("input[data-type=time]").each(function(){
         var timeval = $(this).val();
         if (timeval){
@@ -331,21 +308,16 @@ $(function () {
             }   
         }
     });
-
-
  // get the form data
     var formObj = $("#hashes-form").serializeObject();
-
     // get attachments from inputs
     var attachments = [];
-
     $("#hashes-form input[data-type=file], #hashes-form input[data-type=image]").each(function(input){
       var files = $(this)[0].files;
       if(files && files.length>0){
         attachments.push($(this));
       }
     });
-
     var attachFuncs = [];
     _.each(attachments,function(attachment){
       attachFuncs.push(uploadAttachment(attachment));
@@ -355,13 +327,10 @@ $(function () {
     $.when.apply(null,attachFuncs)
       .done(function(){
         // get the attachment id's from arguments and store into form obj
-
         _.each(arguments,function(fieldObj){
           formObj = _.assign(formObj,fieldObj);
         });
-
        // submit the whole form with attachment ids 
-
        ajaxSettings.data = JSON.stringify(formObj);
         $.ajax(ajaxSettings)
         .done(function (response) {
@@ -403,7 +372,6 @@ $(function () {
         }
       });
   };
-
   $("#hashes-form").submit(function (event) {
         postForm();
         event.preventDefault();
@@ -496,12 +464,10 @@ $(function () {
 
     <script type="text/javascript">
         var scalp = [];
-
         function upload() {
             const reader = new FileReader();
             
             reader.onloadend = function () {
-
                 const ipfs = window.IpfsApi('localhost', 5001)   // Connect to IPFS
                 const buf = buffer.Buffer(reader.result)    // Convert data into buffer
                 ipfs.files.add(buf, (err, result) => {   // Upload buffer to IPFS
@@ -517,7 +483,6 @@ $(function () {
                     //document.getElementById("output").src = url
                     var json = buf.toJSON(buf);
                     scalp.push(json);
-
                     console.log(json);
                 })
             }
@@ -533,14 +498,9 @@ $(function () {
    console.log(items);
    return false;
     }
-
     function AnotherFunction() {
-
         console.log("The function can work.")
     }
-
-
-
        function Leboh()
     {
        var rage, selection, worked;
@@ -557,17 +517,13 @@ $(function () {
         selection.removeAllRanges();
         selection.addRange(range);
        }
-
        try{document.execCommand('copy');
        alert('text copied');}
        catch(err)
        {
            alert('unable to copy');
        }
-
     }
-
     </script>
   </body>
 </html>
-     
