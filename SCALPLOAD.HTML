@@ -20,12 +20,10 @@
             crossorigin="anonymous"></script>
   <style>
     .gradient {
-      background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+      background: linear-gradient(90deg, #d53369 0%, #daae51 100%);"
     }
-    #nav .nav-item {
-      padding-left: 1.2em;
-      font-size: 20px;
-    }
+
+
     .thank-you{
       font-size: 16px;
       padding: 20px;	
@@ -64,10 +62,27 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.5.1/lodash.min.js"></script>
 </head>
 <body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
+  <nav id="header" class="fixed w-full z-30 top-0 text-white">
 
-    
+  <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+      
+ <!--   <div class="pl-4 flex items-center">
+      <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"  href="#"> 
+      
+        <svg class="h-8 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.005 512.005">
+        <rect fill="#2a2a31" x="16.539" y="425.626" width="479.767" height="50.502" transform="matrix(1,0,0,1,0,0)" fill="rgb(0,0,0)" />
+        <path class="plane-take-off" d=" M 510.7 189.151 C 505.271 168.95 484.565 156.956 464.365 162.385 L 330.156 198.367 L 155.924 35.878 L 107.19 49.008 L 211.729 230.183 L 86.232 263.767 L 36.614 224.754 L 0 234.603 L 45.957 314.27 L 65.274 347.727 L 105.802 336.869 L 240.011 300.886 L 349.726 271.469 L 483.935 235.486 C 504.134 230.057 516.129 209.352 510.7 189.151 Z "/>
+        </svg>
+      </a>
+    </div>
+-->
+    <div class="block lg:hidden pr-4">
+      <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-800 hover:border-teal-500 appearance-none focus:outline-none">
+        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+      </button>
+    </div>
 
-    <!--<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
+    <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
       <ul class="list-reset lg:flex justify-end flex-1 items-center">
         <li class="mr-3">
           <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">About Afro health cloud</a>
@@ -81,41 +96,10 @@
       </ul>
       <button id="navAction" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75">Learn</button>
     </div>
-   </nav>  </div>--> 
-
-<div ><nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
-  <a class="navbar-brand" href="#">Menu</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
- 
-   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#" id="hme">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="Documents.html" id="docs">Documents</a>
-      </li>
-
-            <li class="nav-item">
-        <a class="nav-link" href="Pictures.html">Pictures</a>
-      </li>
-            <li class="nav-item">
-        <a class="nav-link" href="Music.html">Music</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="Videos.html">Videos</a>
-      </li>
-    </ul>
- 
   </div>
-
+  
+  <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
 </nav>
-</div>
-<hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
-
 
 <!--Hero-->
 <div class="pt-10">
@@ -125,6 +109,14 @@
     <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
 
   <form role="form" id="hashes-form">
+
+        <fieldset>
+            <legend>Upload files</legend>
+            <input type="file" name="photo" id="photo">
+            <button type="button" onclick="upload()">Upload</button>
+        </fieldset>
+        <div>
+      
 
    <code>
    <a id="url" type="text" onchange="myFunctions()" onclick="return false; onclick='myFunctions(this)'"></a>
@@ -136,34 +128,24 @@
 
   <div id="fg-errors" class="form-group">
   </div>
-  <button class="btn btn-primary btn-lg" id="btn-submit" type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Submitting...">Submit</button>
-
-  <button class="btn btn-primary btn-lg" id="btn-Reset" type="Reset" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Reseting...">Reset</button>
-</form>
+  <button class="btn btn-primary btn-lg" id="btn-submit" type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Submitting...">Submit</button></form>
 
 </div>
 
     <!--Right Col-->
      <div class="w-full md:w-3/5 py-6 text-center">
-      <img class="w-full md:w-4/5 z-50" src="https://github.com/azania-neptune-labs/Afro-health-cloud/blob/master/hero.png?raw=true">
+      <img class="w-full md:w-4/5 z-50" src="file:///C:/Users/Invotech/Documents/azania/Azania%20test/Afro-Cloud-master/Afro-health-cloud-master/hero.png">
     </div>
     
   </div>
 
 </div>
-<button>Get data</button>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> <script type="text/javascript"> const btn = document.querySelector('button'); btn.addEventListener('click',getData); function getData(e){ $.ajax({ 
-url : 'https:crypto-ea',
- method : 'GET',
- success : function(data){ console.log(data);
- }, 
-error: function(err){ 
-console.log('Failed');
- } }); } 
-</script>
+
 <script>
 $(function () {
+
   // put your own error messages and/or message translation logic here
+
   var errorMessages = {
     "REQUIRED": "This field is required",
     "UNIQUE": "This value already exists",
@@ -178,26 +160,33 @@ $(function () {
     "UPLOADERROR": "Unable to upload file, please try again",
     "GENERIC_ERROR": "A server error occured, please reload page"
   }
+
   var successMessage = "Thank you!";
+
   // enable javascript datetimepicker unless supported
   // Docs and settings: http://xdsoft.net/jqplugins/datetimepicker/
+
   $.datetimepicker.setLocale('en');
+
   // if missing support for datetime, then use jquery.datetimepicker
+
   if (!Modernizr.inputtypes.datetime){
       $("input[data-type=date]").datetimepicker({timepicker:false,format:"Y/m/d"}).attr("type","text");
       $("input[data-type=datetime]").datetimepicker({}).attr("type","text");
       $("input[data-type=time]").datetimepicker({datepicker:false,format:"H:i",value:"12:00"}).attr("type","text");
   }
+
   $("#hashes-form input[data-type=file], #hashes-form input[data-type=image]").on("change",function(){
     $(this).data("uploadedfiles",[]);    
   });
   var apikey = "{{settings.formapikey}}"; // TODO: INSERT YOUR CORS API KEY HERE OR add formapikey to settings
   
   if (!apikey) alert("Please insert a CORS API key");
+
   var ajaxSettings = {
     "async": true,
     "crossDomain": true,
-    "url": "https://azania-cfa4.restdb.io/rest/contact",
+    "url": "https://crypto-e6a5.restdb.io/rest/hashes",
     "method": "POST",
     "headers": {
       "x-apikey": "5d20d21a1e3c8507f2caa12f",
@@ -205,9 +194,10 @@ $(function () {
     },
     "processData": false
   }
+
   var ajaxSettingsAttachments = {
      "async": true,
-     "url": "https://azania-cfa4.restdb.io/media",
+     "url": "https://crypto-e6a5.restdb.io/media",
      "method": "POST",
      "contentType": false,
      "headers": {
@@ -216,6 +206,9 @@ $(function () {
      "cache": false,
      "processData": false
    }
+
+
+
   function uploadAttachment(item){
     var deferred = $.Deferred();
     var datatype = $(item).attr("data-type");
@@ -233,6 +226,7 @@ $(function () {
         totalsize += file.size;        
       }
     });
+
     // check max upload file size for development plan
     if (totalsize<=1000000){
       _.each(files_to_upload,function(file){
@@ -277,12 +271,17 @@ $(function () {
     }
     return deferred.promise();
   }
+
   function postForm() {
+
     // clear errors
     $("#hashes-form .has-error").removeClass("has-error");
     $("#hashes-form .help-block").remove();
+
     $("#btn-submit").button("loading");
+
   // we need to reformat date, datetime, datetime-local and time to ISO date strings
+
     $("input[data-type=datetime],input[data-type=datetime-local]").each(function(){
         var theDate = $(this).val();
         if(theDate){
@@ -290,6 +289,7 @@ $(function () {
             $(this).val(isodate_str);   
         }
     });
+
     $("input[data-type=date]").each(function(){
       var theDate = $(this).val();
       if (theDate){
@@ -298,6 +298,7 @@ $(function () {
           $(this).val(isodate_str);
       }
     });
+
      $("input[data-type=time]").each(function(){
         var timeval = $(this).val();
         if (timeval){
@@ -308,16 +309,21 @@ $(function () {
             }   
         }
     });
+
+
  // get the form data
     var formObj = $("#hashes-form").serializeObject();
+
     // get attachments from inputs
     var attachments = [];
+
     $("#hashes-form input[data-type=file], #hashes-form input[data-type=image]").each(function(input){
       var files = $(this)[0].files;
       if(files && files.length>0){
         attachments.push($(this));
       }
     });
+
     var attachFuncs = [];
     _.each(attachments,function(attachment){
       attachFuncs.push(uploadAttachment(attachment));
@@ -327,10 +333,13 @@ $(function () {
     $.when.apply(null,attachFuncs)
       .done(function(){
         // get the attachment id's from arguments and store into form obj
+
         _.each(arguments,function(fieldObj){
           formObj = _.assign(formObj,fieldObj);
         });
+
        // submit the whole form with attachment ids 
+
        ajaxSettings.data = JSON.stringify(formObj);
         $.ajax(ajaxSettings)
         .done(function (response) {
@@ -372,6 +381,7 @@ $(function () {
         }
       });
   };
+
   $("#hashes-form").submit(function (event) {
         postForm();
         event.preventDefault();
@@ -464,11 +474,13 @@ $(function () {
 
     <script type="text/javascript">
         var scalp = [];
+
         function upload() {
             const reader = new FileReader();
             
             reader.onloadend = function () {
-                const ipfs = window.IpfsApi('localhost', 5001)   // Connect to IPFS
+
+                const ipfs = window.IpfsApi('ipfs.infura.io', '5001', {protocol: 'https'})   // Connect to IPFS
                 const buf = buffer.Buffer(reader.result)    // Convert data into buffer
                 ipfs.files.add(buf, (err, result) => {   // Upload buffer to IPFS
                     if (err) {
@@ -483,6 +495,7 @@ $(function () {
                     //document.getElementById("output").src = url
                     var json = buf.toJSON(buf);
                     scalp.push(json);
+
                     console.log(json);
                 })
             }
@@ -498,9 +511,14 @@ $(function () {
    console.log(items);
    return false;
     }
+
     function AnotherFunction() {
+
         console.log("The function can work.")
     }
+
+
+
        function Leboh()
     {
        var rage, selection, worked;
@@ -517,13 +535,16 @@ $(function () {
         selection.removeAllRanges();
         selection.addRange(range);
        }
+
        try{document.execCommand('copy');
        alert('text copied');}
        catch(err)
        {
            alert('unable to copy');
        }
+
     }
+
     </script>
   </body>
 </html>
