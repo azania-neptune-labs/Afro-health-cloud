@@ -1,3 +1,5 @@
+
+<!DOCTYPE html>
 <html>
 <head>
   <title>restdb.io hashes</title>
@@ -19,12 +21,13 @@
             crossorigin="anonymous"></script>
   <style>
     .gradient {
-      background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+      background: linear-gradient(90deg, #d53369 0%, #daae51 100%);"
     }
     #nav .nav-item {
       padding-left: 1.2em;
       font-size: 20px;
     }
+
     .thank-you{
       font-size: 16px;
       padding: 20px;	
@@ -61,11 +64,27 @@
   <script src="https://crypto-e6a5.restdb.io/assets/js/jquery-serialize-object.min.js"></script>
   <script src="https://crypto-e6a5.restdb.io/assets/js/jquery.datetimepicker.full.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.5.1/lodash.min.js"></script>
+
 </head>
 <body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
 
     
 
+    <!--<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
+      <ul class="list-reset lg:flex justify-end flex-1 items-center">
+        <li class="mr-3">
+          <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">About Afro health cloud</a>
+        </li>
+        <li class="mr-3">
+          <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#">Admition form</a>
+        </li>
+        <li class="mr-3">
+          <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#">Go to cloud</a>
+        </li>
+      </ul>
+      <button id="navAction" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75">Learn</button>
+    </div>
+   </nav>  </div>--> 
 
 <div ><nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
   <a class="navbar-brand" href="#">Menu</a>
@@ -107,30 +126,32 @@
   <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
     <!--Left Col-->
     <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
-   <h1>The table here</h1>
-      <p id="demo"></p>
-   <button class="btn" type="button">Click</button>
-      <script>
-     $(document).ready(function(){
-        
-       $('.btn').click(function(){
-       $.ajax({
-         "async": true,
-         "crossDomain": true,
-         "url":"https://crypto-e6a5.restdb.io/rest/hashes",
-         "method":"GET",
-         "headers": {
-          "content-type": "application/json",
-          "x-aikey": "5d39a391769140543c170099",
-          "cache-control": "no-cache",
-         }
-        
+
+  <form role="form" id="hashes-form">
+
+        <fieldset>
+            <legend>Upload files</legend>
+            <input type="file" name="photo" id="photo">
+            <button type="button" onclick="upload()">Upload</button>
+        </fieldset>
+        <div>
       
-       })
-       })
-     })
-      </script>
- 
+
+   <code>
+   <a id="url" type="text" onchange="myFunctions()" onclick="return false; onclick='myFunctions(this)'"></a>
+ </code>
+    </div>
+<div class="form-group">
+  <label>Hash: </label><input class="form-control" name="hash" data-type="text" type="text">
+</div>
+
+  <div id="fg-errors" class="form-group">
+  </div>
+  <button class="btn btn-primary btn-lg" id="btn-submit" type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Submitting...">Submit</button>
+
+  <button class="btn btn-primary btn-lg" id="btn-Reset" type="Reset" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Reseting...">Reset</button>
+</form>
+
 </div>
 
     <!--Right Col-->
@@ -144,7 +165,9 @@
 
 <script>
 $(function () {
+
   // put your own error messages and/or message translation logic here
+
   var errorMessages = {
     "REQUIRED": "This field is required",
     "UNIQUE": "This value already exists",
@@ -159,44 +182,55 @@ $(function () {
     "UPLOADERROR": "Unable to upload file, please try again",
     "GENERIC_ERROR": "A server error occured, please reload page"
   }
+
   var successMessage = "Thank you!";
+
   // enable javascript datetimepicker unless supported
   // Docs and settings: http://xdsoft.net/jqplugins/datetimepicker/
+
   $.datetimepicker.setLocale('en');
+
   // if missing support for datetime, then use jquery.datetimepicker
+
   if (!Modernizr.inputtypes.datetime){
       $("input[data-type=date]").datetimepicker({timepicker:false,format:"Y/m/d"}).attr("type","text");
       $("input[data-type=datetime]").datetimepicker({}).attr("type","text");
       $("input[data-type=time]").datetimepicker({datepicker:false,format:"H:i",value:"12:00"}).attr("type","text");
   }
+
   $("#hashes-form input[data-type=file], #hashes-form input[data-type=image]").on("change",function(){
     $(this).data("uploadedfiles",[]);    
   });
   var apikey = "{{settings.formapikey}}"; // TODO: INSERT YOUR CORS API KEY HERE OR add formapikey to settings
   
   if (!apikey) alert("Please insert a CORS API key");
+
   var ajaxSettings = {
     "async": true,
     "crossDomain": true,
     "url": "https://crypto-e6a5.restdb.io/rest/hashes",
     "method": "POST",
     "headers": {
-      "x-apikey": "5d20d21a1e3c8507f2caa12f",
+      "x-apikey": apikey,
       "content-type": "application/json"
     },
     "processData": false
   }
+
   var ajaxSettingsAttachments = {
      "async": true,
-     "url": "https://crypto-e6a5.restdb.io/rest/hashes",
+     "url": "https://crypto-e6a5.restdb.io/media",
      "method": "POST",
      "contentType": false,
      "headers": {
-       "x-apikey": "5d20d21a1e3c8507f2caa12f"
+       "x-apikey": apikey
      },
      "cache": false,
      "processData": false
    }
+
+
+
   function uploadAttachment(item){
     var deferred = $.Deferred();
     var datatype = $(item).attr("data-type");
@@ -214,6 +248,7 @@ $(function () {
         totalsize += file.size;        
       }
     });
+
     // check max upload file size for development plan
     if (totalsize<=1000000){
       _.each(files_to_upload,function(file){
@@ -258,12 +293,17 @@ $(function () {
     }
     return deferred.promise();
   }
+
   function postForm() {
+
     // clear errors
     $("#hashes-form .has-error").removeClass("has-error");
     $("#hashes-form .help-block").remove();
+
     $("#btn-submit").button("loading");
+
   // we need to reformat date, datetime, datetime-local and time to ISO date strings
+
     $("input[data-type=datetime],input[data-type=datetime-local]").each(function(){
         var theDate = $(this).val();
         if(theDate){
@@ -271,6 +311,7 @@ $(function () {
             $(this).val(isodate_str);   
         }
     });
+
     $("input[data-type=date]").each(function(){
       var theDate = $(this).val();
       if (theDate){
@@ -279,6 +320,7 @@ $(function () {
           $(this).val(isodate_str);
       }
     });
+
      $("input[data-type=time]").each(function(){
         var timeval = $(this).val();
         if (timeval){
@@ -289,16 +331,21 @@ $(function () {
             }   
         }
     });
+
+
  // get the form data
     var formObj = $("#hashes-form").serializeObject();
+
     // get attachments from inputs
     var attachments = [];
+
     $("#hashes-form input[data-type=file], #hashes-form input[data-type=image]").each(function(input){
       var files = $(this)[0].files;
       if(files && files.length>0){
         attachments.push($(this));
       }
     });
+
     var attachFuncs = [];
     _.each(attachments,function(attachment){
       attachFuncs.push(uploadAttachment(attachment));
@@ -308,10 +355,13 @@ $(function () {
     $.when.apply(null,attachFuncs)
       .done(function(){
         // get the attachment id's from arguments and store into form obj
+
         _.each(arguments,function(fieldObj){
           formObj = _.assign(formObj,fieldObj);
         });
+
        // submit the whole form with attachment ids 
+
        ajaxSettings.data = JSON.stringify(formObj);
         $.ajax(ajaxSettings)
         .done(function (response) {
@@ -353,6 +403,7 @@ $(function () {
         }
       });
   };
+
   $("#hashes-form").submit(function (event) {
         postForm();
         event.preventDefault();
@@ -406,5 +457,116 @@ $(function () {
   
 </script>
 
+<script>
+  
+  
+  /*Toggle dropdown list*/
+  /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
+  
+  var navMenuDiv = document.getElementById("nav-content");
+  var navMenu = document.getElementById("nav-toggle");
+  
+  document.onclick = check;
+  function check(e){
+    var target = (e && e.target) || (event && event.srcElement);
+    
+    //Nav Menu
+    if (!checkParent(target, navMenuDiv)) {
+    // click NOT on the menu
+    if (checkParent(target, navMenu)) {
+      // click on the link
+      if (navMenuDiv.classList.contains("hidden")) {
+      navMenuDiv.classList.remove("hidden");
+      } else {navMenuDiv.classList.add("hidden");}
+    } else {
+      // click both outside link and outside menu, hide menu
+      navMenuDiv.classList.add("hidden");
+    }
+    }
+    
+  }
+  function checkParent(t, elm) {
+    while(t.parentNode) {
+    if( t == elm ) {return true;}
+    t = t.parentNode;
+    }
+    return false;
+  }
+</script>
+
+    <script type="text/javascript">
+        var scalp = [];
+
+        function upload() {
+            const reader = new FileReader();
+            
+            reader.onloadend = function () {
+
+                const ipfs = window.IpfsApi('localhost', 5001)   // Connect to IPFS
+                const buf = buffer.Buffer(reader.result)    // Convert data into buffer
+                ipfs.files.add(buf, (err, result) => {   // Upload buffer to IPFS
+                    if (err) {
+                        console.error(err)
+                        return
+                    }
+                    console.log("result is", result);
+                    let url = "https://ipfs.io/ipfs/" + result[0].hash;
+                    console.log("Url -->", url);
+                    document.getElementById("url").innerHTML = url
+                    document.getElementById("url").href = url
+                    //document.getElementById("output").src = url
+                    var json = buf.toJSON(buf);
+                    scalp.push(json);
+
+                    console.log(json);
+                })
+            }
+            const photo = document.getElementById("photo");
+            reader.readAsArrayBuffer(photo.files[0]);     //Read Provided File
+        }
+           var items = [];
+   
+ 
+   function myFunction() {
+   boxvalue = document.getElementById('url').text;
+   items.push(boxvalue);  
+   console.log(items);
+   return false;
+    }
+
+    function AnotherFunction() {
+
+        console.log("The function can work.")
+    }
+
+
+
+       function Leboh()
+    {
+       var rage, selection, worked;
+       if(document.body.createTextRange)
+       {
+           Range=document.body.createTextRange();
+           rage.moveToElementText(Element);
+           range.select();
+       } else if(Window.getSelection)
+       {
+        selection= window.getSelection();
+        rage=document.createRange();
+        rage=selectNodeContents(Element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+       }
+
+       try{document.execCommand('copy');
+       alert('text copied');}
+       catch(err)
+       {
+           alert('unable to copy');
+       }
+
+    }
+
+    </script>
   </body>
 </html>
