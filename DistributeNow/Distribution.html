@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Distribution Page</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendor/nouislider/nouislider.min.css">
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href="ionicons/css/ionicons.min.css" rel="stylesheet">
+    
+    <style>
+        #dd input
+        {
+            width: 75%;
+            margin:0 auto;
+        } 
+
+        input:hover
+        {
+            color: blue;
+        }
+
+    </style>
+
+
+
+
+</head>
+<body style="padding: 1px;">
+
+    <div class="main">
+
+        <div  class="container">
+            <div  class="signup-content">
+                <div class="signup-img" style="background-color: grey; margin-top: 20px;">
+                    <img src="images/untitled design 2.png">
+                    <div class="signup-img-content" id="down">
+                        <h2>Release now </h2>
+                       <span style ="color: white;"> <marquee behavior="alternate" >Upload your music</marquee> </span>
+                    </div>
+                </div>
+                <div class="signup-form" id="dd">
+                    <form style="text-align: center;" action="LOAD.PHP" method="post" class="register-form" id="register-form">
+                        <h1 style="text-align: center;">Artist information</h1><hr><br><br>
+
+                            <div class="form-group">
+                                <div class="form-input">
+                                    <label for="first_name" class="required" >First name</label>
+                                    <input type="text" name="first_name" id="firstName" />
+                                </div><br>
+                                <div class="form-input">
+                                    <label for="last_name" class="required">Last name</label>
+                                    <input type="text" name="last_name" id="lastName" />
+                                </div><br>
+                            </div>
+                            <div class = "form-group">
+                                <div class="form-input">
+                                    <label for="email" class="required">Email</label>
+                                    <input type="text" name="email" id="emailAddress" />
+                                </div><br>
+                                <div class="form-input">
+                                    <label for="phone_number" class="required">Phone number</label>
+                                    <input type="text" name="phone_number" id="phone_number" />
+                                </div>
+
+                            </div>
+                            
+                      
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+ <div style="" class="container" id="duplicater">
+            <div class="signup-content" >
+                <div class="signup-img" style="background-color: grey;">
+                    <img src="images/untitled design (2).png" alt="" style="">
+                    <div class="signup-img-content"><br><br><br><br><br><br>
+                        <h2>Release now </h2>
+                        <p>Distribute your music and get it mastered !</p>
+                    </div>
+                </div>
+                <div class="signup-form" id="duplicate">
+                    <form method="POST" class="register-form" id="register-form">
+                       <h1 style="text-align: center;">Track information</h1><hr><br><br>
+                        <div class="form-row">
+                           
+                        <div class="form-group">
+                                 <div class="form-group">
+                                <div class="form-input">
+                                    <label for="first_name" class="required">Track title</label>
+                                    <input type="text" name="track_title" id="track_title" /><br>
+                                </div>
+                                <div class="form-input">
+                                    <label for="last_name" class="required">Artist (Lead)</label>
+                                    <input type="text" name="artist_name" id="last_name" /><br>
+                                </div>
+                                <div class="form-input">
+                                    <label for="company" class="required">Genre</label>
+                                    <input type="text" name="genre" id="company" /><br>
+                                </div>
+                                <div class="form-input">
+                                    <label for="email" class="required">Featured artist</label>
+                                    <input type="text" name="featured" id="email" /><br>
+                                </div>
+                                <div class="form-input">
+                                    <label for="phone_number" class="required">Recording Year</label>
+                                    <input type="text" name="recording_year" id="phone_number" /><br><br>
+
+                                </div>
+                            </div>
+                        </div><br>
+
+
+
+
+                        <div class="form-group" ><br><br>
+                                <div class="form-select" style="margin-top: -60px;">
+                                    <div class="label-flex">
+                                        <label for="meal_preference">Track type</label>
+                                        <a class="form-link">Track detail</a>
+                                    </div>
+                                    <div class="select-list">
+                                        <select name="meal_preference" id="meal_preference">
+                                            <option value="">--Track type--  </option>
+                                            <option value="">Original  </option>
+                                            <option value="">Remix </option>
+                                            <option value="">Cover </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-radio">
+                                    <div class="label-flex">
+                                        <label for="payment">Release Type</label>
+                                        <a  class="form-link">Release Detail</a>
+                                    </div>
+                                    <div class="form-radio-group">            
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="payment" id="cash" checked>
+                                            <label for="cash">Single</label>
+                                            <span class="check"></span>
+                                        </div>
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="payment" id="cheque">
+                                            <label for="cheque">EP</label>
+                                            <span class="check"></span>
+                                        </div>
+                                        <div class="form-radio-item">
+                                            <input type="radio" name="payment" id="demand">
+                                            <label for="demand">Album</label>
+                                            <span class="check"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-input">
+                                    <label for="chequeno">Contributor's name</label>
+                                    <input type="text" name="chequeno" id="chequeno" />
+                                </div>
+
+                                <div>
+                                     <label for="meal_preference">Role</label>
+                                     <a class="form-link">Contributor's role</a>
+                                     <select style="width: 100%; height: 45px; font-family: poppins">
+                                     <option>--Select Role--</option>
+                                     <option>Producer</option>
+                                     <option>Writer</option>
+                                     <option>Mixer</option>
+
+
+                                 </select> <br>
+                                 </div><br>
+
+
+                               
+                                <div class="form-input">
+                                        <label for="fileupload">Upload song</label> 
+                                    <input type="file" name="fileupload" value="fileupload" accept="audio/*" id="fileupload">
+                                </div><br>
+
+
+                                 <div class="form-input">
+                                        <label for="fileupload">Upload your cover art</label> 
+                                    <input type="file" name="fileupload" value="fileupload" accept="image/*" id="fileupload">
+                                </div>
+                                <div onclick="duplicate()">
+                                <img id="duplicate"  style="width:35px; float: right;" src="images/plus.jpg">
+                            </div><br>
+                            </div>
+
+                                <!-------->
+                            </div>
+                             <div class="form-input">
+
+                                    <fieldset>
+                                            <legend>Upload files</legend>
+                                            <input type="file" name="photo" id="photo">
+                                            <button type="button" onclick="upload()">Upload</button>
+                                        </fieldset>
+                                        <div>
+                                      
+                                
+                                   <code>
+                                   <a id="url" type="text" onchange="myFunctions()" onclick="return false; onclick='myFunctions(this)'"></a>
+                                 </code>
+                                    </div>
+                                <div class="form-group">
+                                  <label>Hash: </label><input class="form-control" name="hash" data-type="text" type="text">
+                                </div>
+                                    <input type="submit" name="genre" id="company" /><br>
+                                </div>
+                        </div>
+                       
+                    
+                    </form>
+                </div>
+        </div></div>
+
+<span class="glyphicon glyphicon-plus"></span>
+ 
+
+
+  
+
+
+
+    </div>
+
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/nouislider/nouislider.min.js"></script>
+    <script src="vendor/wnumb/wNumb.js"></script>
+    <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/JavaScript.js"></script>
+    <script src="ionicons/scripts.js"></script>
+
+    <script >
+        var i = 0;
+        var original = document.getElementById('duplicater');
+        function duplicate() {
+            clear()
+            var clone = original.cloneNode(true); // "deep" clone
+            clone.id = "duplicater" + ++i;
+            original.parentNode.appendChild(clone);
+        }
+
+
+        function clear()
+        {
+            document.getElementById('track_title').value = "";   
+        }
+
+
+
+    </script>
+     <script type="text/javascript">
+        var scalp = [];
+        function upload() {
+            const reader = new FileReader();
+            
+            reader.onloadend = function () {
+                const ipfs = window.IpfsApi('ipfs.infura.io', '5001', {protocol: 'https'})   // Connect to IPFS
+                const buf = buffer.Buffer(reader.result)    // Convert data into buffer
+                ipfs.files.add(buf, (err, result) => {   // Upload buffer to IPFS
+                    if (err) {
+                        console.error(err)
+                        return
+                    }
+                    console.log("result is", result);
+                    let url = "https://ipfs.io/ipfs/" + result[0].hash;
+                    console.log("Url -->", url);
+                    document.getElementById("url").innerHTML = url
+                    document.getElementById("url").href = url
+                    //document.getElementById("output").src = url
+                    var json = buf.toJSON(buf);
+                    scalp.push(json);
+                    console.log(json);
+                })
+            }
+            const photo = document.getElementById("photo");
+            reader.readAsArrayBuffer(photo.files[0]);     //Read Provided File
+        }
+           var items = [];
+   
+ 
+   function myFunction() {
+   boxvalue = document.getElementById('url').text;
+   items.push(boxvalue);  
+   console.log(items);
+   return false;
+    }
+    function AnotherFunction() {
+        console.log("The function can work.")
+    }
+       function Leboh()
+    {
+       var rage, selection, worked;
+       if(document.body.createTextRange)
+       {
+           Range=document.body.createTextRange();
+           rage.moveToElementText(Element);
+           range.select();
+       } else if(Window.getSelection)
+       {
+        selection= window.getSelection();
+        rage=document.createRange();
+        rage=selectNodeContents(Element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+       }
+       try{document.execCommand('copy');
+       alert('text copied');}
+       catch(err)
+       {
+           alert('unable to copy');
+       }
+    }
+    </script>
+</body>
+</html>
