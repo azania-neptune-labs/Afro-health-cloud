@@ -1,0 +1,381 @@
+	<!--?php
+
+        function test(){
+    		$host = 'localhost';
+    		$user = 'root';
+    		$pass = '';
+    		$db = 'bestSoFar';
+
+    		$con = mysqli_connect($host, $user, $pass, $db);
+            $firstname = mysqli_real_escape_string($con, $_GET['first_name']);
+            $lastName = mysqli_real_escape_string($con, $_GET['last_name']);
+            $email = mysqli_real_escape_string($con, $_GET['email']);
+
+       
+
+
+    		if($con)
+            {
+    			echo "Connected";
+    		}
+            else
+            {
+    			echo "failed to upload";
+    		}
+
+    		$sql = "insert into users (firstName, lastName, email) values ('$firstname', '$lastName', '$email')";
+    		$query = mysqli_query($con, $sql);
+
+    		if($query)
+                echo "Inserted";
+            else
+                echo "Failed to insert";
+        
+    }
+
+    function display()
+    {
+        echo "Hello";
+    }
+
+
+	    /*if( isset('submit')) {
+	    $post_id = $_POST['id'];
+	    $post_name = $_POST['first_name'];
+	    $post_lastName = $_POST['last_name'];
+	    $post_email = $_POST['email'];
+	    $phone_number = $_POST['phone_number'];
+	    $track_title = $_POST['track_title'];
+	    $artist_name = $_POST['artist_name'];
+	    $genre = $_POST['genre'];
+	    $featured = $_POST['featured'];
+	    $recording_year = $_POST['recording_year'];
+
+	    $link = new mysqli('localhost','root','','users');
+
+	    if($link->connect_error)
+	        die('connection error: '.$link->connect_error);
+
+	    $sql = "INSERT INTO users(first_name, last_name) VALUES('".$first_name."', '".$last_name."',)";
+
+	    //echo $sql;    
+
+	    $result = $link->query($sql); }
+
+	    if($result > 0):
+	        echo 'Successfully posted';
+	    else:
+	        echo 'Unable to post';
+	    endif;
+
+	    $link->close();
+	    die();
+	    endif;*/
+
+
+	    ?>*/-->
+
+
+<?php
+session_start();
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Distribution Page</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendor/nouislider/nouislider.min.css">
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href="css/ionicons.css" rel="stylesheet">
+
+
+    <style>
+        #dd input
+        {
+            width: 75%;
+            margin:0 auto;
+        } 
+
+        input:hover
+        {
+            color: blue;
+        }
+
+    </style>
+
+
+
+
+</head>
+<body style="padding: 1px;" >
+    <form action="LOAD.PHP" method="POST" class="demo" id="demo" name="myForm" style="text-align: center;">
+    <div class="main">
+
+        <div  class="container" style="border-radius: 1%;">
+            <div  class="signup-content">
+                <div class="signup-img" style="background-color: black; margin-top: 0px;">
+                    <img src="images/Art1.png">
+                    <div class="signup-img-content" id="down">
+                        <h2>Release now </h2>
+                       <span style ="color: white;"> <marquee behavior="alternate" >Upload your music</marquee> </span>
+                    </div>
+                </div>
+                <div class="signup-form" id="dd" style="border-radius: 1%;">
+                    <form style="text-align: center;"   class="register-form" id="register-form">
+                        <h1 style="text-align: center;">Artist information</h1><hr><br><br>
+
+                            <div class="form-group">
+                                <div class="form-input">
+                                    <label for="first_name" class="required">First name</label>
+                                    <input type="text" name="first_name" id="first_name" />
+                                </div><br>
+                                <div class="form-input">
+                                    <label for="last_name" class="required">Last name</label>
+                                    <input type="text" name="last_name" id="last_name" />
+                                </div><br>
+                            </div>
+                            <div class = "form-group">
+                                <div class="form-input">
+                                    <label for="email" class="required">Email</label>
+                                    <input type="text" name="email" id="email" />
+                                </div><br>
+                                <div class="form-input">
+                                    <label for="phone_number" class="required">Phone number</label>
+                                    <input type="text" name="phone_number" id="phone_number" value ="+27" />
+                            </div>
+                </div>
+            </div>
+        </div>
+
+
+ <div style="margin-bottom: 0%; border-radius: 1%;" class="container" id="duplicater">
+            <div class="signup-content" >
+                <div class="signup-img" style="margin-bottom: 0%;">
+                    <img src="images/Art.png" alt="" style="margin-bottom: -15%; height: 1030px;">
+                    <div class="signup-img-content"><br><br><br><br><br><br>
+                        <h2>Release now </h2>
+                        <p>Distribute your music and get it mastered !</p>
+                    </div>
+                </div>
+                <div class="signup-form" id="duplicate">
+                       <h1 style="text-align: center;">Track information</h1><hr><br><br>
+                        <div class="form-row">
+                           
+                        <div class="form-group">
+                                 <div class="form-group">
+                                <div class="form-input">
+                                    <label for="first_name" class="required">Track title</label>
+                                    <input type="text" name="track_title" id="track_title" /><br>
+                                </div>
+                                <div class="form-input">
+                                    <label for="last_name" class="required">Artist (Lead)</label>
+                                    <input type="text" name="artist_name" id="artist_lead" /><br>
+                                </div>
+                                <div class="form-input">
+                                    <label for="company" class="required">Genre</label>
+                                    <input type="text" name="genre" id="genre" /><br>
+                                </div>
+                                <div class="form-input">
+                                    <label for="email" class="required">Featured artist</label>
+                                    <input type="text" name="featured" id="featured" /><br>
+                                </div>
+                                <div class="form-input">
+                                    <label for="phone_number" class="required">Recording Year</label>
+                                    <input type="text" name="recording_year" id="recordingYear" /><br><br>
+
+                                </div>
+                            </div>
+                        </div><br>
+
+
+
+
+                        <div class="form-group" ><br><br>
+                                <div class="form-select" style="margin-top: -60px;">
+                                    <div class="label-flex">
+                                        <label for="meal_preference">Track type</label>
+                                        <a class="form-link">Track detail</a>
+                                    </div>
+                                 <!--    <div class="select-list">
+                                        <select id="meal_preference" >
+                                            <option value="">--Track type--  </option>
+                                            <option id="orig" value="Original" >Original  </option>
+                                            <option id="remix" value="Remix">Remix </option>
+                                            <option id="cover" value="Cover">Cover </option>
+                                                                                       </div>
+
+                                        </select> -->
+
+                                            <!--Test -->
+                                             <div>
+                       
+                                                <input list="emp_names" id="txt_name" name="txt_name">
+                            <datalist id="emp_names">
+                              <option value="Original" id="Original">Original</option>
+                              <option value="Remix" id="Remix">Remix</option>
+                              <option value="Cover" id="Cover">Cover</option>
+                            </datalist>
+                                                
+
+                            <!--asffds-->
+
+
+
+
+                                    </div>
+
+                                </div>
+                                    <div class="label-flex">
+                                        <label for="payment">Release Type</label>
+                                        <a  class="form-link">Release Detail</a>
+                                    </div>
+                                    <div>
+                                    <input list="emp_namesss" id="txt_namess" name="txt_namess">     
+                                    <datalist id="emp_namesss" name = "release">    
+                                         <option value="Single" id="Single">Single</option>
+                                         <option value="Ep" id="Ep">Ep</option>
+                                         <option value="Album" id="Album">Album</option>
+                                    </datalist>
+                                    </div>
+
+                                <div>
+
+                                <div class="form-input">
+                                    <label for="chequeno">Contributor's name</label>
+                                    <input type="text" name="chequeno" id="chequeno" />
+                                </div>
+
+                                <div>
+                                     <label for="meal_preference">Role</label>
+                                     <a class="form-link">Contributor's role</a>
+
+                                   <input list="emp_namess" id="txt_names" name="txt_names">
+                            <datalist id="emp_namess">
+                              <option value="Producer" id="Producer">Producer</option>
+                              <option value="Writer" id="Producer">Writer</option>
+                              <option value="Mixer" id="Mixer">Mixer</option>
+                            </datalist>
+                             <br>
+                                 </div><br>
+
+
+                               
+                                <div class="form-input">
+                                        <label for="fileupload">Upload song</label> 
+                                        <p><a href="JavaScript:newPopup('https://azania-neptune-labs.github.io/IPFS/');">Click to upload song</a></p> 
+                                        <input  id="song" type="text" name="song"/>
+                                </div><br>
+
+
+                                 <div class="form-input">
+                                        <label for="fileupload">Upload your cover art</label>
+                                        <p><a href="JavaScript:newPopup('https://azania-neptune-labs.github.io/IPFS/');">Click to upload cover art</a></p> 
+                                        <input  id="cover" type="text" name="cover"/>
+                                </div>
+                                <div onclick="duplicate()">
+                                <img id="duplicate"  style="width:35px; float: right;" src="images/plus.jpg">
+                            </div><br>
+                            </div>
+                            
+                                <!-------->
+                            </div>
+                            
+                        </div>
+                       
+                    
+                    </form>
+
+                </div>
+
+        </div>
+
+    </div>
+                                <div style="width: 150px; float: right; margin-right: 6%; margin-top: 1%; " class="form-input">
+                                    <input type="submit" name="" id="submit" onclick="alertTheSelectedValue()" /><br>
+                                </div>
+<span class="glyphicon glyphicon-plus"></span>
+ 
+
+
+  
+
+
+
+    </div>
+    
+
+    </form>
+
+
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/nouislider/nouislider.min.js"></script>
+    <script src="vendor/wnumb/wNumb.js"></script>
+    <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="js/main.js"></script>
+
+        <script>
+        var i = 0;
+        var original = document.getElementById('duplicater');
+        function duplicate() {
+            clear()
+            var clone = original.cloneNode(true); // "deep" clone
+            clone.id = "duplicater" + ++i;
+            original.parentNode.appendChild(clone);
+        }
+        
+    </script>
+
+    <script>
+             var alertTheSelectedValue = function() { //track type
+      var val = document.getElementById('txt_name').value;
+      var text = $('#emp_names').find('option[value="' + val + '"]').attr('value');
+      document.getElementById('txt_name').value = text;
+      releaseType();
+      alert(text);
+    }
+
+    </script>
+
+        <script>
+             var alertTheSelectedValues = function() { //role
+      var val = document.getElementById('txt_names').value;
+      var text = $('#emp_namess').find('option[value="' + val + '"]').attr('value');
+      document.getElementById('txt_names').value = text;
+      alert(text);
+    }
+
+    </script>
+
+    <script>
+// Popup window code
+function newPopup(url) {
+    popupWindow = window.open(url,'popUpWindow','height=300,width=400,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+}
+
+    </script>
+
+    <script>
+      var releaseType = function() { //release type
+      var val = document.getElementById('').value;
+      var text = $('#emp_namesss').find('option[value="' + val + '"]').attr('value');
+      document.getElementById('txt_namess').value = text;
+      alert(text);
+      alertTheSelectedValues();
+    </script>
+
+
+</body>
+</html>
