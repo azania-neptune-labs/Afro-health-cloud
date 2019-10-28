@@ -5,7 +5,7 @@
    body {
   margin: 0;
   padding: 10px;
-  background: #ccc;
+  background:
 }
    .thank-you{
       font-size: 16px;
@@ -104,10 +104,18 @@
   left: -100vw;
   overflow-y: auto;
   z-index: 0;
-  background-color: hsl(0,0%,100%);
+  background: url(https://images.unsplash.com/photo-1415886541506-6efc5e4b1786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
+   background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
   padding: 0em;
 }
 
+#two{
+  display: block;
+  font-size: x-large;
+  color: white;
+}
 .page:target {
   left: 0vw;
   z-index: 1;
@@ -178,23 +186,21 @@
   </div>
 
   <div class="page" id="two">
-      <form role="form" id="hashes-form">
+     <form role="form" id="hashes-form">
 <div class="form-group">
-  <label>Hash: </label><input class="form-control" name="hash" data-type="text" type="text">
-</div>
-<div class="form-group" >
-  <label id="shop">First name: </label><input class="form-control" name="First Name" data-type="text" type="text">
+  <label>First name: </label><input class="form-control" name="First Name" data-type="text" type="text">
 </div>
 <div class="form-group">
-  <label id="shop">Last name: </label><input class="form-control" name="Last Name" data-type="text" type="text">
+  <label>Last name: </label><input class="form-control" name="Last Name" data-type="text" type="text">
 </div>
 <div class="form-group">
-  <label id="shop">Email: </label><input class="form-control" name="Email" data-type="email" type="email">
+  <label>Email: </label><input class="form-control" name="Email" data-type="email" type="email">
 </div>
 <div class="form-group">
-  <label id="shop"> Phone number: </label><input class="form-control" name="Phone Number" data-type="number" type="text">
+  <label>Phone number: </label><input class="form-control" name="Phone Number" data-type="number" type="text">
 </div>
 <div class="form-group">
+  <div class="form-group">
   <label>Track title: </label><input class="form-control" name="Track Title" data-type="text" type="text">
 </div>
 <div class="form-group">
@@ -231,13 +237,7 @@
       <option value="cover">Cover</option>
       <option value="remastered">Remastered</option>  </select>
 </div>
-<div class="form-group">
-  <label>Release type:</label>
-    <select class="form-control"  name="Release Type" data-type="option"  >
-      <option value="EP">Ep</option>
-      <option value="Album">Album</option>
-      <option value="Single">Single</option>  </select>
-</div>
+
 <div class="form-group">
   <label>Contributors name: </label><input class="form-control" name="Contributors Name" data-type="text" type="text">
 </div>
@@ -257,11 +257,33 @@
 <div class="form-group">
   <label id="shop">Company: </label><input class="form-control" name="company" data-type="text" type="text">
 </div>
+    <label>Release type:</label>
+      <select class="form-control"  name="Release Type" id="type" data-type="option" onchange="showDiv('hidden_div', this)" >
+       <!-- <option value="EP">Ep</option> -->
+        <option value="Single">Single</option>
+        <option value="Project">Project</option>  </select>
+  </div>
+  <div class="form-group" id="hidden_div">
+      <label>Number Of Tracks:</label>
+        <select class="form-control"   name="Version" data-type="option" onchange="numofGuests(this)" >
+          <option value="1">Single Track</option>
+          <option value="2"> 2-Tracks </option>
+          <option value="3">3-Tracks</option>
+          <option value="4">4-Tracks</option>
+          <option value="5">5-Tracks</option>
+          <option value="6">6-Tracks </option>
+          <option value="7">7-Tracks</option>
+          <option value="8">8-Tracks</option>
+          <option value="9">9-Tracks</option>
+          <option value="10">10-Tracks</option>
+          <option value="11">11-Tracks</option>  </select>
+    <div id="guestFormOne"></div>
+
 
   <div id="fg-errors" class="form-group">
   </div>
   <button class="btn btn-primary btn-lg" id="btn-submit" type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Submitting...">Submit</button></form>
-  </div>
+     </div>
   <div class="page" id="three">
       <form role="form" id="shoping-form">
 <div class="form-group">
@@ -517,6 +539,39 @@
   </div>
   <button class="btn btn-primary btn-lg" id="btn-submit" type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Submitting...">Submit</button></form>
   </div>
+  <script>
+  function newPopup() {
+  popupWindow = window.open(
+    'https://azania-neptune-labs.github.io/IPFS/','popUpWindow','height=300,width=400,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+}
+   function numofGuests(val) {
+    document.getElementById('guestFormOne').innerHTML = "";
+    for (i = 0; i < parseInt(val.value); i++) { 
+        document.getElementById('guestFormOne').innerHTML += '<h4>Track '+(i+1)+'</h4><div class="form-group"><label>Track title: </label><input class="form-control" name="Track Title" data-type="text" type="text"></div><div class="form-group"><label>Track type:</label><select class="form-control"  name="Track Type" data-type="option" ><option value="Original">Original</option><option value="remix">Remix</option><option value="cover">Cover</option>  </select></div><div class="form-group"><label>Artist: </label><input class="form-control" name="Artist" data-type="text" type="text"></div><div class="form-group"><label>Genre: </label><input class="form-control" name="Genre" data-type="text" type="text"></div><div class="form-group"><label>Feature: </label><input class="form-control" name="Feature" data-type="text" type="text"></div><div class="form-group"><label>Recording year: </label><input class="form-control" name="Recording Year" data-type="text" type="text"></div><div class="form-group"><label>Version:</label><select class="form-control"  name="Version" data-type="option"  ><option value="Live">Live</option><option value="Instrumental">Instrumental</option><option value="Demo">Demo</option><option value="Delux">Delux</option><option value="Accoustic">Accoustic</option><option value="Accapella">Accapella</option><option value="Remix">Remix</option><option value="Edit">Edit</option><option value="Extended">Extended</option><option value="cover">Cover</option><option value="remastered">Remastered</option></select></div><div class="form-group"><label>Contributors name: </label><input class="form-control" name="Contributors Name" data-type="text" type="text"></div><div class="form-group"><label>Role: </label><input class="form-control" name="Role" data-type="text" type="text"></div><div class="form-group"><label>Coverhash: <a onclick="newPopup();">Click to upload song</a></label><input class="form-control" name="coverHash" data-type="text" type="text"></div><div class="form-group"><label>MusicHash: <a onclick="newPopup();">Click to upload song</a> </label><input class="form-control" name="hash" data-type="text" type="text"></div>';
+    }      
+}    
+  function showDiv(divId, element)
+{ 
+  // in progress with EP and Album commented code
+  //  var val =document.getElementById("type").value;
+  // if(val=='EP'){
+  //   document.getElementById(divId).style.display = element.value == 'EP' ? 'block' : 'none';
+  // }
+  // else if(val=='Album'){
+  //   document.getElementById(divId).style.display = element.value == 'Album' ? 'block' : 'none';
+  // }
+  // else if(val=='Single'){
+    document.getElementById(divId).style.display = element.value == 'Project' ? 'block' : 'none';
+
+  // }
+  // else{
+  //     alert("Please choose Release Type");
+  // }
+
+    
+}
+</script>
+
   <script type="text/javascript">
     Array.from(document.querySelectorAll("a"))
 .map(x => x.addEventListener("click", 
